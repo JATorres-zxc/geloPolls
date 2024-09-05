@@ -3,13 +3,16 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
+from rest_framework import generics
+from rest_framework.response import Response
+from .serializer import QuestionSerializer
+
 
 from .models import Choice, Question
 
 
-class IndexView(generic.ListView):
-    template_name = 'polls/index.html'
-    context_object_name = 'latest_question_list'
+class IndexView(generics.ListAPIView):
+    serializer_class = QuestionSerializer
 
     def get_queryset(self):
         """
@@ -30,7 +33,6 @@ class DetailView(generic.DetailView):
         Excludes any questions that aren't published yet.
         """
         return Question.objects.filter(pub_date__lte=timezone.now())
-
 
 class ResultsView(generic.DetailView):
     model = Question
