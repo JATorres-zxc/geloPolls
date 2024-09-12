@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     
     'polls',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+    # 'sileo'
     
 ]
 
@@ -61,6 +62,11 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',  
     'http://127.0.0.1:8080',
 ]
+
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8080']
+
+CSRF_COOKIE_HTTPONLY = False
+
 
 ROOT_URLCONF = 'geloPolls.urls'
 
